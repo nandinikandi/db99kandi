@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title 
+  - let vehicles =[{make:"Hyundai",model:"Accord",year:"2003"},{make:"Nissan",model:"Sedan",year:"2008"},{make:"Maruti",model:"Hatch",year:"2017"}]
+  div(class="container-fluid mt-3")
+  div(class="row")
+    each vehicle,index in vehicles
+      div(class="col-sm-2 bg-warning m-1 p-3" onclick=`buy(${index})`) #{vehicle.make} - #{vehicle.model} - #{vehicle.year}
+  script.
+     
+    function buy(itemNo)
+    {
+      alert(`You purchased Item ${itemNo+1}`)
+    }

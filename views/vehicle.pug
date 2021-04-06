@@ -2,7 +2,9 @@ extends layout
 
 block content
   h1= title 
-  - let vehicles =[{make:"Hyundai",model:"Accord",year:"2003"},{make:"Nissan",model:"Sedan",year:"2008"},{make:"Maruti",model:"Hatch",year:"2017"}]
+  //- - let vehicles =[{make:"Hyundai",model:"Accord",year:"2003"},{make:"Nissan",model:"Sedan",year:"2008"},{make:"Maruti",model:"Hatch",year:"2017"}]
+  - let vehicles = results
+  
   div(class="container-fluid mt-3")
   div(class="row")
     each vehicle,index in vehicles

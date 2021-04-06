@@ -22,7 +22,7 @@ async function recreateDB(){
   await Vehicle.deleteMany();
   let instance1 = new Vehicle({make:"honda", model:'accord',year:2003});
   let instance2 = new Vehicle({make:"Nissan",model:"Sedan",year:2008});
-  let instance3 = new Vehicle({make:"Maruti", model:'Hatch',year:2017});
+  let instance3 = new Vehicle({make:"BMW", model:'Hatch',year:2017});
 
   instance1.save( function(err,doc) {
   if(err) return console.error(err);

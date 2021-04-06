@@ -4,11 +4,51 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true, useUnifiedTopology: true});
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function(){ 
+console.log("Connection to DB succeeded")});
+var Vehicle = require("./models/vehicle");
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+  await Vehicle.deleteMany();
+  let instance1 = new Vehicle({make:"honda", model:'accord',year:2003});
+  let instance2 = new Vehicle({make:"Nissan",model:"Sedan",year:2008});
+  let instance3 = new Vehicle({make:"Maruti", model:'Hatch',year:2017});
+
+  instance1.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("First object saved")
+  });
+
+  instance2.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Second object saved")
+  });
+
+  instance3.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Third object saved")
+  });
+  }
+
+  let reseed = true;
+  if (reseed) { recreateDB();}
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var vehicleRouter = require('./routes/vehicle');
 var starsRouter = require('./routes/stars');
 var slotRouter = require('./routes/slot');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -27,7 +67,7 @@ app.use('/user',usersRouter);
 app.use('/vehicle', vehicleRouter);
 app.use('/stars',starsRouter);
 app.use('/slot',slotRouter);
-
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

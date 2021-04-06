@@ -15,9 +15,30 @@ exports.vehicle_detail = function (req, res) {
     res.send('NOT IMPLEMENTED: Vehicle detail: ' + req.params.id);
 };
 // Handle Vehicle create on POST.
-exports.vehicle_create_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Vehicle create POST');
+
+exports.vehicle_create_post = async function (req, res) {
+    console.log(req.body)
+    let document = new Vehicle();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costumetype":"goat", "cost":12, "size":"large"}
+    document.make = req.body.make;
+    document.model = req.body.model;
+    document.year = req.body.year;
+    try {
+        let result = await document.save();
+        res.send(result);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 };
+
+// exports.vehicle_create_post = function (req, res) {
+//     res.send('NOT IMPLEMENTED: Vehicle create POST');
+// };
 // Handle Vehicle delete form on DELETE.
 exports.vehicle_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Vehicle delete DELETE ' + req.params.id);

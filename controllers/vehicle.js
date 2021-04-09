@@ -44,9 +44,9 @@ exports.vehicle_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Vehicle delete DELETE ' + req.params.id);
 };
 // Handle Vehicle update form on PUT.
-exports.vehicle_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Vehicle update PUT' + req.params.id);
-};
+// exports.vehicle_update_put = function (req, res) {
+//     res.send('NOT IMPLEMENTED: Vehicle update PUT' + req.params.id);
+// };
 
 
 // VIEWS
@@ -71,5 +71,23 @@ exports.vehicle_detail = async function(req, res) {
     } catch (error) {
         res.status(500)
         res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
+
+//Handle Vehicle update form on PUT.
+exports.vehicle_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Vehicle.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.make) toUpdate.make = req.body.make;
+        if(req.body.model) toUpdate.model = req.body.model;
+        if(req.body.year) toUpdate.year = req.body.year;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
     }
 };

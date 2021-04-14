@@ -15,6 +15,8 @@ router.get('/create', vehicle_controlers.vehicle_create_Page);
 /* GET create update page */
 router.get('/update', vehicle_controlers.vehicle_update_Page);
 
+/* GET create vehicle page */
+router.get('/delete', vehicle_controlers.vehicle_delete_Page);
 
 
 // router.get('/', function(req, res, next) {

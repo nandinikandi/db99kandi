@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+
+  - let vehicleid = toShow._id
+  - let vehiclemake = toShow.make
+  - let vehiclemodel = toShow.model
+  - let vehicleyear = toShow.year
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{vehicleid}
+  - let actionid = "/resource/resource/vehicles/" + vehicleid
+  form(id='VehicleForm', action= actionid, method="PUT")
+    div.form-group
+        label.vehicleAttr(for='make') Vehicle make
+        input#make(type='text', name='make', value= vehiclemake )
+    div.form-group
+        label.vehicleAttr(for='model') Vehicle model
+        input#model(type='text', name='model', value= vehiclemodel )
+    div.form-group
+        label.vehicleAttr(for='year') Vehicle year
+        input#year(type='number', name='year', value= vehicleyear )
+    input(type="submit")
+
+  script.
+    document.forms['VehicleForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });

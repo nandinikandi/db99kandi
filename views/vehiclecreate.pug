@@ -1,19 +1,24 @@
 extends layout
 
 block content
+  link( rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+
   h1= title
 
-  form(id='VehicleForm', action="/resource/resource/vehicles", method="POST")
+  form.container(id='VehicleForm', action="/resource/resource/vehicles", method="POST")
     div.form-group
-        label.vehicleAttr(for='make') Vehicle make
-        input#make(type='text', name='make')
+        label(for='make') Vehicle make
+        input.form-control#make(type='text', name='make')
     div.form-group
-        label.vehicleAttr(for='model') Vehicle model
-        input#model(type='text', name='model')
+        label(for='model') Vehicle model
+        input.form-control#model(type='text', name='model')
     div.form-group
-        label.vehicleAttr(for='year') Vehicle year
-        input#year(type='number', name='year')
-    input(type="submit")
+        label(for='year') Vehicle year
+        input.form-control#year(type='number', name='year')
+    input.btn.btn-primary(type="submit")
 
   script.
     document.forms['VehicleForm'].addEventListener('submit', (event) => {
@@ -32,4 +37,6 @@ block content
         alert("Save failed " + error )
       });
     });
+
+
 

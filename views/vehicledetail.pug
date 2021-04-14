@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+
+  - let vehicleid = toShow._id
+  - let vehiclemake = toShow.make
+  - let vehiclemodel = toShow.model
+  - let vehicleyear= toShow.year
+  div
+    div.row
+      div(class='vehicleAttr mr-3') Vehicle ID is:
+      div #{vehicleid}
+    div.row
+      div(class='vehicleAttr mr-3') Vehicle Make is:
+      div #{vehiclemake}
+    div.row
+      div(class='vehicleAttr mr-3') Vehicle Model is:
+      div #{vehiclemodel}
+    div.row
+      div(class='vehicleAttr mr-3') Vehicle Year is:
+      div #{vehicleyear}
+
+
+

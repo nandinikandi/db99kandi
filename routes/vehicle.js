@@ -6,6 +6,9 @@ var router = express.Router();
 /* GET vehicle page. */
 router.get('/', vehicle_controlers.vehicle_view_all_Page );
 
+/* GET detail vehicle page */
+router.get('/detail', vehicle_controlers.vehicle_view_one_Page);
+
 // router.get('/', function(req, res, next) {
 //   res.render('vehicle', { title: 'Search Results for Vehicle' });
 // });

@@ -2,26 +2,28 @@ extends layout
 
 block content
   h1= title
-
+if (toShow == null)
+  h2 No instance to delete
+  else
   - let vehicleid = toShow._id
   - let vehiclemake = toShow.make
   - let vehiclemodel = toShow.model
   - let vehicleyear = toShow.year
-  
+
   div.row(class='mb-2')
     div.mr-1 ID is
     div #{vehicleid}
   - let actionid = "/resource/resource/vehicles/" + vehicleid
   form(id='VehicleForm', action= actionid, method="PUT")
     div.form-group
-        label.vehicleAttr(for='make') Vehicle make
-        input#make(type='text', name='make', value= vehiclemake )
+      label.vehicleAttr(for='make') Vehicle make
+      input#make(type='text' name='make', value= vehiclemake )
     div.form-group
-        label.vehicleAttr(for='model') Vehicle model
-        input#model(type='text', name='model', value= vehiclemodel )
+      label.vehicleAttr(for='model') Vehicle model
+      input#model(type='text' name='model', value= vehiclemodel )
     div.form-group
-        label.vehicleAttr(for='year') Vehicle year
-        input#year(type='number', name='year', value= vehicleyear )
+      label.vehicleAttr(for='year') Vehicle year
+      input#year(type='number' name='year', value= vehicleyear )
     input(type="submit")
 
   script.

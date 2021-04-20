@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-if (toShow == null)
-  h2 No instance to delete
+  if (toShow == null)
+    h2 No instance to delete
   else
   - let vehicleid = toShow._id
   - let vehiclemake = toShow.make

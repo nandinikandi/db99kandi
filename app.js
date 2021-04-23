@@ -23,10 +23,9 @@ passport.use(new LocalStrategy(
 const connectionString = process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString,
-{useNewUrlParser: true, useUnifiedTopology: true});
+{useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 60000});
 //Get the default connection
 var db = mongoose.connection;
-mongoose.set('bufferCommands', false);
 //Bind connection to error event
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function(){ 

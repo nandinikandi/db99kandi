@@ -2,15 +2,14 @@ extends layout
 
 block content
   h1= title
-
   if (toShow == null)
     h2 No instance to delete
   else
-    - let vehicleid = toShow._id
-    - let vehiclemake = toShow.make
-    - let vehiclemodel = toShow.model
-    - let vehicleyear = toShow.year
-    - let actionid = "/resource/resource/vehicles/" + vehicleid
+    -let vehicleid = toShow._id
+    -let vehiclemake = toShow.make
+    -let vehiclemodel = toShow.model
+    -let vehicleyear = toShow.year
+    -let actionid = "/resource/resource/vehicles/" + vehicleid
     script let actionid = "#{actionid}"
     div
       div.row
@@ -32,7 +31,7 @@ block content
   script.
     function cancel() {
       // Go back to the home page for the vehicle collection
-      window.location.href='/vehicles'
+      window.location.href='/vehicle'
     }
   script.
     function deleteOnid() {
@@ -44,7 +43,7 @@ block content
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
         alert("Delete succeded")
-        window.location.href='/vehicles'
+        window.location.href='/vehicle'
         // TODO handle body
       }).catch((error) => {
         // TODO handle error

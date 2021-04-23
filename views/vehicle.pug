@@ -1,16 +1,30 @@
 extends layout
 
 block content
+  - let createSrc = `dispatch(\"/vehicle/create\")`
+  button.btn( class="btn-success ml-1", onclick= createSrc, style = "width:50%") Create Vehicle
+  br
   h1= title 
   //- - let vehicles =[{make:"Hyundai",model:"Accord",year:"2003"},{make:"Nissan",model:"Sedan",year:"2008"},{make:"Maruti",model:"Hatch",year:"2017"}]
+  
   - let vehicles = results
 
   div(class="container-fluid")
   div(class="row m-1")
     each vehicle,index in vehicles
       - let destination = `dispatch(\"/vehicle/update?id=${vehicle._id}\")`
-      div(class="col-sm-2 bg-warning m-1 p-3" onclick=`buy(${index})`) #{vehicle.make} - #{vehicle.model} - #{vehicle.year}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+      - let viewSrc = `dispatch(\"/vehicle/detail?id=${vehicle._id}\")`
+      - let deleteSrc = `dispatch(\"/vehicle/delete?id=${vehicle._id}\")`
+      div(class="row-sm-1 bg-warning m-1 p-3" onclick=`buy(${index})`)  Vehicle Make is #{vehicle.make} and Model is #{vehicle.model} from Year - #{vehicle.year}.
+        br
+        br
+        button.btn( class="btn-info ml-1", onclick= viewSrc, style = "width:100%") View Details
+        br
+        br
+        button.btn( class="btn-primary ml-1", onclick= destination, style = "width:100%") Update
+        br
+        br
+        button.btn( class="btn-danger ml-1", onclick= deleteSrc, style = "width:100%") Delete
   script.
     function buy(itemNo)
     {

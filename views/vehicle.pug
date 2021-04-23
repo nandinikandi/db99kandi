@@ -5,7 +5,7 @@ block content
   //- - let vehicles =[{make:"Hyundai",model:"Accord",year:"2003"},{make:"Nissan",model:"Sedan",year:"2008"},{make:"Maruti",model:"Hatch",year:"2017"}]
   - let vehicles = results
 
-  div(class="container-fluid mt-3")
+  div(class="container-fluid")
   div(class="row m-1")
     each vehicle,index in vehicles
       - let destination = `dispatch(\"/vehicle/update?id=${vehicle._id}\")`
